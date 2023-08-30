@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="7EECYtYeFRjnzAV4nDY2nDfgdkZQjNmu8BfjDqjB">
+
+    <title>Good luck play win</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="css/css-app.css">
+    <link rel="stylesheet" href="css/css-frontend.css">
+    <!-- Scripts -->
+    <!-- Livewire Styles -->
+    <style>
+        [wire\:loading],
+        [wire\:loading\.delay],
+        [wire\:loading\.inline-block],
+        [wire\:loading\.inline],
+        [wire\:loading\.block],
+        [wire\:loading\.flex],
+        [wire\:loading\.table],
+        [wire\:loading\.grid] {
+            display: none;
+        }
+
+        [wire\:offline] {
+            display: none;
+        }
+
+        [wire\:dirty]:not(textarea):not(input):not(select) {
+            display: none;
+        }
+
+        input:-webkit-autofill,
+        select:-webkit-autofill,
+        textarea:-webkit-autofill {
+            animation-duration: 50000s;
+            animation-name: livewireautofill;
+        }
+
+        @keyframes livewireautofill {
+            from {}
+        }
+    </style>
+    <link rel="stylesheet" href="https://github.hubspot.com/odometer/themes/odometer-theme-car.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js">
+    </script>
+    <script src="js/odometer-odometer.js"></script>
+    <script src="js/js-app.js" defer></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-analytics.js";
+        import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyDgEA294DNm-KIa9cZ1rhMIM8eA3hIoiQg",
+            authDomain: "ckri-bf3b8.firebaseapp.com",
+            projectId: "ckri-bf3b8",
+            storageBucket: "ckri-bf3b8.appspot.com",
+            messagingSenderId: "652119987509",
+            appId: "1:652119987509:web:87aea22fe1cdb34e88e87c",
+            measurementId: "G-RPPG8MWFZ5"
+        };
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const storage = getStorage();
+
+        const d = new Date();
+        var date = '';
+        const dayy = d.getDate();
+        var day = dayy.toString().length < 2 ? "0" + dayy : dayy;
+        const monthh = d.getMonth() + 1;
+        let month = monthh.toString().length < 2 ? "0" + monthh : monthh;
+        date += day;
+        date += "-";
+        date += month;
+        date += "-";
+        date += d.getFullYear();
+        document.getElementById("today-date-goodluck").innerHTML = date;
+
+        function tConvert(time) {
+            // Check correct time format and split into components
+            time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+            if (time.length > 1) { // If time format correct
+                time = time.slice(1);  // Remove full string match value
+                time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+                time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+            return time.join(''); // return adjusted time or original string
+        }
+        var minutes = d.getMinutes() < 30 ? "00" : "30";
+        var minutesForM = d.getMinutes();
+        if (minutesForM < 20) {
+            minutesForM = "00"
+        } else {
+            if (minutesForM < 40) {
+                minutesForM = "20"
+            } else {
+                minutesForM = "40"
+            }
+        }
+        var hour = (d.getHours() < 10 ? '0' : '') + d.getHours();
+
+
+        const rowformatedTime = tConvert(hour + ":" + minutes);
+        const rowformatedTimeForM = tConvert(hour + ":" + minutes);
+
+        const formatedTime = rowformatedTime.substring(2, 3) == ':' ? rowformatedTime : "0" + rowformatedTime;
+        const formatedTimeForM = rowformatedTimeForM.substring(2, 3) == ':' ? rowformatedTimeForM : "0" + rowformatedTimeForM;
+        let data_date = d.getFullYear() + "-" + month + "-" + day;
+        var showPageOne = false;
+        var showPageSecond = false;
+        const firstTref = ref(storage, data_date + '.json');
+
+        // Get the download URL
+        var topLottery = 0;
+        var topLotteryTime = "";
+        getDownloadURL(firstTref)
+            .then((url) => {
+                $.getJSON(url,
+                    function (datatime) {
+                        var listOfObjectNumber = [];
+                        var skip = false;
+                        $.each(datatime, function (key, value) {
+                            if (d.getHours() < 10) {
+                                skip = true;
+                            }
+                            if (skip) return;
+                            if (formatedTime == value.t) {
+                                skip = true;
+                            }
+                            topLottery = parseInt(value.m);
+                            topLotteryTime = value.t;
+                            var student = '';
+                            student += '<tr>';
+                            student += '<td>' +
+                                value.t + '</td>';
+
+                            student += '<td>' +
+                                value.m + '</td>';
+
+                            student += '<td>' +
+                                value.d + '</td>';
+
+                            student += '<td>' +
+                                value.s + '</td>';
+
+                            student += '</tr>';
+                            listOfObjectNumber[listOfObjectNumber.length] = student;
+                        });
+                        var finalNumber = '';
+                        listOfObjectNumber.reverse();
+                        listOfObjectNumber.forEach(function (thisNumber) {
+                            finalNumber += thisNumber;
+                        });
+
+                        $('#t1').append(finalNumber);
+                        showPageOne = true;
+                        showPageVisible();
+
+                        let topL1 = topLottery % 19 * 19;
+                        let topL2 = topLottery % 33 * 33;
+                        let topL3 = topLottery % 13 * 13;
+
+                        document.getElementById("topLottery1").innerHTML = getTopLotteryNum(topL1);
+                        document.getElementById("topLottery2").innerHTML = getTopLotteryNum(topL2);
+                        document.getElementById("topLottery3").innerHTML = getTopLotteryNum(topL3);
+                        document.getElementById("topLotteryTime").innerHTML = getTopLotteryNum(topLotteryTime);
+                        
+                    }).fail(function () {
+                        showPageOne = true;
+                        showPageVisible();
+                    });
+            }).catch((error) => {
+                showPageOne = true;
+                showPageVisible();
+            });
+        function getTopLotteryNum(num) {
+            var tlfn = num;
+            if (tlfn >= 100) {
+                if (tlfn >= 1000) {
+                    tlfn = tlfn.toString().substring(2, 4);
+                } else {
+                    tlfn = tlfn.toString().substring(1, 3);
+                }
+
+            } else {
+                if (tlfn <= 10) {
+                    tlfn = +tlfn + +36;
+                }
+            }
+            if (tlfn.length <= 1) {
+                return "0" + tlfn;
+            } else {
+                return tlfn;
+            };
+        }
+
+
+        const secondTref = ref(storage, "m" + data_date + '.json');
+        getDownloadURL(secondTref)
+            .then((url) => {
+                $.getJSON(url,
+                    function (datatime) {
+                        var listOfObjectNumber = [];
+                        var skip = false;
+                        $.each(datatime, function (key, value) {
+                            if (d.getHours() < 10) {
+                                skip = true;
+                            }
+                            if (skip) return;
+                            if (formatedTimeForM == value.t) {
+                                skip = true;
+                            }
+                            var student = '';
+                            student += '<tr>';
+
+                            student += '<td>' +
+                                date + '</td>';
+
+                            student += '<td>' +
+                                value.t + '</td>';
+
+                            student += '<td>' +
+                                value.m + '</td>';
+
+                            student += '</tr>';
+                            listOfObjectNumber[listOfObjectNumber.length] = student;
+
+                        });
+                        var finalNumber = '';
+                        listOfObjectNumber.reverse();
+                        listOfObjectNumber.forEach(function (thisNumber) {
+                            finalNumber += thisNumber;
+                        });
+
+                        $('#t2').append(finalNumber);
+
+                        showPageSecond = true;
+                        showPageVisible();
+                    }).fail(function () {
+                        showPageSecond = true;
+                        showPageVisible();
+                    });
+            }).catch((error) => {
+                showPageSecond = true;
+                showPageVisible();
+            });
+
+        function showPageVisible() {
+            if (showPageOne && showPageSecond) {
+                $('#body').show();
+            }
+        }
+
+    </script>
+    <script src="index.js"></script>
+</head>
+
+<body id="body" style="display:none;" class="min-h-screen font-sans antialiased text-gray-900">
+    <div class="flex items-center w-full bg-yellow-400">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <strong
+                        class="justify-center hidden mt-1 text-sm font-bold text-center text-gray-700 md:flex md:text-xl">News</strong>
+                </div>
+                <div class="py-1 col-12 col-md-11">
+                    <div class="px-2 py-1 text-sm font-semibold leading-none text-center bg-gray-100 md:text-xl">
+                        <marquee>
+                            Result will be open every 30 minutes : &nbsp;&nbsp;|&nbsp;&nbsp; !!GOODLUCK PLAYWIN
+                            &#2350;&#2375;&#2306; &#2310;&#2346;&#2325;&#2366;
+                            &#2360;&#2381;&#2357;&#2366;&#2327;&#2340; &#2361;&#2376;!! : &nbsp;&nbsp;|&nbsp;&nbsp;
+                            !!WELCOME TO GOODLUCK PLAYWIN!! : The biggest game
+                            that
+                            is played in India &nbsp;&nbsp;|&nbsp;&nbsp; </marquee>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relative min-h-screen featured-image">
+        <div class="absolute w-full h-full bg-black opacity-50"></div>
+        <div class="container relative z-10">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="flex items-center justify-center h-full py-1">
+                        <img class="hidden w-32 md:block" src="images/image-dixe-fast.gif" alt="">
+                    </div>
+                </div>
+                <div class=" col-md-8" x-data="{ atTop: true, openModal: false }"
+                    x-on:scroll.window="atTop = (window.pageYOffset &gt; 100 &amp;&amp; window.innerWidth &lt; 769) ? false : true; "
+                    x-on:keydown.escape=" openModal = openModal ? false : true">
+                    <div class="flex items-center justify-center py-1 bg-black md:bg-transparent"
+                        x-bind:class="{ ' fixed top-0 left-0 right-0 z-50 py-14 px-8 shadow-lg': !atTop }">
+                        <img class="max-w-full img-responsive" src="images/image-logo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="flex items-center justify-center h-full py-1">
+                        <img class="hidden w-32 md:block" src="images/image-dixe-fast.gif" alt="">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div
+                        class="flex justify-center px-4 py-2 text-xl font-semibold text-white border-2 border-yellow-500 rounded-sm d-none d-md-block">
+                        Open At 10:00 AM and Close At 07:00 PM
+                    </div>
+                    <div
+                        class="flex flex-col justify-center w-full py-2 mb-2 font-semibold text-white border-2 border-yellow-500 rounded-sm md:mt-4 text-md sm:text-xl">
+                        <div class="w-full row">
+                            <div class="col-6 col-md-3">
+                                <div class="flex flex-col items-center justify-center py-2 uppercase">
+                                    <span class="text-center text-yellow-400 text-md-left">NEXT DRAW TIME</span>
+                                    <strong class="py-2 text-2xl font-extrabold ">
+                                        <p id="nexttime">11:00 AM</p>
+                                        <script>
+                                            var showSeconds = false
+                                            const nextdate = new Date();
+                                            var thour = nextdate.getHours();
+                                            var tminute = nextdate.getMinutes();
+                                            if (thour < 19 && thour > 9) {
+                                                var ampm = '';
+                                                if (thour > 11) {
+                                                    ampm = "PM";
+                                                    thour -= 12;
+                                                    if (thour == 0) thour = 12;
+                                                } else {
+                                                    ampm = "AM";
+                                                }
+                                                if (tminute < 30) {
+                                                    tminute = 30;
+                                                } else {
+                                                    if (thour == 12) {
+                                                        thour = 1;
+                                                    } else {
+                                                        thour += 1;
+                                                    }
+                                                    tminute = "00";
+                                                }
+                                                let date = thour.toString() + ":" + tminute.toString() + " " + ampm;
+                                                document.getElementById("nexttime").innerHTML = date.toString();
+                                                showSeconds = true
+                                            } else {
+                                                document.getElementById("nexttime").innerHTML = "10:00 AM";
+                                                showSeconds = false
+                                            }
+                                        </script>
+
+                                    </strong>
+                                </div>
+                            </div>
+
+                            <div class=" d-none d-md-block col-md-3">
+                                <div class="flex flex-col items-center justify-center py-2 uppercase">
+                                    <span class="text-yellow-400">TODAY DATE</span>
+                                    <strong id="today-date-goodluck"
+                                        class="py-2 text-2xl font-extrabold ">02-07-2023</strong>
+                                </div>
+                            </div>
+
+                            <div class=" d-none d-md-block col-md-3">
+                                <div class="flex flex-col items-center justify-center py-2 uppercase">
+                                    <span class="text-yellow-400">NOW TIME
+                                    </span>
+                                    <strong class="py-2 text-2xl font-extrabold ">10:53 AM</strong>
+                                </div>
+                            </div>
+
+                            <div class=" col-6 col-md-3">
+                                <div class="flex flex-col items-center justify-center py-2 uppercase">
+                                    <span class="text-yellow-400">TIME TO DRAW</span>
+                                    <strong class="py-2 text-2xl font-extrabold ">
+
+                                        <div class="" id="time_to_draw"></div>
+                                        <script type="text/javascript">
+                                            if (!showSeconds) {
+                                                document.getElementById("time_to_draw").innerHTML = "----";
+                                            } else {
+                                                var currentDate = new Date();
+                                                var coff = 1000 * 60 * 30;
+
+                                                // var countDownDate = new Date(new Date(currentDate.getTime() + 30*60000)).getTime();
+                                                var countDownDate = new Date(new Date(
+                                                    Math.ceil(currentDate / coff) * coff)).getTime();
+                                                var x = setInterval(function () {
+                                                    var now = new Date().getTime();
+
+                                                    // Find the distance between now and the count down date
+                                                    var distance = countDownDate - now;
+
+                                                    // Time calculations for days, hours, minutes and seconds
+                                                    // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                    var minutes = (Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) < 10) ? "0" + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)) : Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                    var seconds = (Math.floor((distance % (1000 * 60)) / 1000) < 10) ? "0" + Math.floor((distance % (1000 * 60)) / 1000) : Math.floor((distance % (1000 * 60)) / 1000);
+
+                                                    // Display the result in the element with id="demo"
+                                                    document.getElementById("time_to_draw").innerHTML = minutes + ": " + seconds + " ";
+
+                                                    // If the count down is finished, write some text
+                                                    if (distance < 0) {
+                                                        clearInterval(x);
+                                                        document.getElementById("time_to_draw").innerHTML = "----";
+                                                        location.reload();
+                                                    }
+
+                                                }, 1000)
+                                            }
+                                        </script>
+
+                                    </strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="flex flex-col items-center justify-center uppercase night-res">
+                                    <a href="#gl_night">
+                                        <span class="text-xl text-yellow-400">Good Luck Night Results
+                                        </span></a>
+                                    <a href="#gl_night">
+                                        <strong class="py-2 text-2xl font-extrabold text-white ">10:00 PM</strong></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="flex flex-col items-center justify-center">
+                        <strong class="my-4 text-3xl font-bold text-white uppercase">GOODLUCK MUMBAI</strong>
+                        <img class="w-36 md:w-48 animate-spin-slow" src="images/image-casinowheel.png">
+                        <div id="lottery1" class="my-4 text-4xl">100000</div>
+                    </div>
+                    <script>
+                        var lcount = 0;
+                        var lel = [];
+                        var eod = [];
+                        lel[lcount] = document.getElementById("lottery1");
+                        eod[lcount] = new Odometer({
+                            el: lel[lcount],
+                            value: 100000,
+                            format: 'd',
+                            theme: 'car'
+                        });
+                        lcount++;
+                        setInterval(function () {
+                            var randomNumber = Math.floor(Math.random() * 30567);
+                            eod[0].update(randomNumber);
+                        }, 2500);
+                    </script>
+                </div>
+                <div class="col-md-3">
+                    <div class="flex flex-col items-center justify-center">
+                        <strong class="my-4 text-3xl font-bold text-white uppercase">GOODLUCK Delhi</strong>
+                        <img class="w-36 md:w-48 animate-spin-slow" src="images/image-casinowheel.png">
+                        <div id="lottery2" class="my-4 text-4xl">100000</div>
+                    </div>
+                    <script>
+                        var lcount2 = 0;
+                        var lel2 = [];
+                        var eod2 = [];
+                        lel2[lcount2] = document.getElementById("lottery2");
+                        eod2[lcount2] = new Odometer({
+                            el: lel2[lcount2],
+                            value: 100000,
+                            format: 'd',
+                            theme: 'car'
+                        });
+                        lcount2++;
+                        setInterval(function () {
+                            var randomNumber = Math.floor(Math.random() * 30567);
+                            eod2[0].update(randomNumber);
+                        }, 2500);
+                    </script>
+                </div>
+                <div class="col-md-3">
+                    <div class="flex flex-col items-center justify-center">
+                        <strong class="my-4 text-3xl font-bold text-white uppercase">GOODLUCK Sikkim</strong>
+                        <img class="w-36 md:w-48 animate-spin-slow" src="images/image-casinowheel.png">
+                        <div id="lottery3" class="my-4 text-4xl">100000</div>
+                    </div>
+                    <script>
+                        var lcount3 = 0;
+                        var lel3 = [];
+                        var eod3 = [];
+                        lel3[lcount3] = document.getElementById("lottery3");
+                        eod3[lcount3] = new Odometer({
+                            el: lel3[lcount3],
+                            value: 100000,
+                            format: 'd',
+                            theme: 'car'
+                        });
+                        lcount3++;
+                        setInterval(function () {
+                            var randomNumber = Math.floor(Math.random() * 30567);
+                            eod3[0].update(randomNumber);
+                        }, 2500);
+                    </script>
+                </div>
+                <div class="col-md-3">
+                    <div class="flex flex-col items-center justify-center">
+                        <strong class="my-4 text-3xl font-bold text-white uppercase">GOODLUCK Goa</strong>
+                        <img class="w-36 md:w-48 animate-spin-slow" src="images/image-casinowheel.png">
+                        <div id="lottery4" class="my-4 text-4xl">100000</div>
+                    </div>
+                    <script>
+                        var lcount3 = 0;
+                        var lel3 = [];
+                        var eod3 = [];
+                        lel3[lcount3] = document.getElementById("lottery4");
+                        eod3[lcount3] = new Odometer({
+                            el: lel3[lcount3],
+                            value: 100000,
+                            format: 'd',
+                            theme: 'car'
+                        });
+                        lcount3++;
+                        setInterval(function () {
+                            var randomNumber = Math.floor(Math.random() * 30567);
+                            eod3[0].update(randomNumber);
+                        }, 2500);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <div class="col">
+                <div class="my-4 text-center point-list mmb-45">
+                    <table class="point-table">
+                        <tbody>
+                            <tr>
+                                <td class="small-font " width="20%">Lottery Name</td>
+                                <td class="hidden text-center small-font lg:table-cell">Win</td>
+                                <td class="text-center small-font">00 - 09</td>
+                                <td class="text-center small-font">10 - 19</td>
+                                <td class="hidden text-center small-font lg:table-cell">20 - 29</td>
+                                <td class="hidden text-center small-font lg:table-cell ">30 - 39</td>
+                                <td class="hidden text-center small-font lg:table-cell">40 - 49</td>
+                                <td class="hidden text-center small-font lg:table-cell">50 - 59</td>
+                                <td class="hidden text-center small-font lg:table-cell">60 - 69</td>
+                                <td class="hidden text-center small-font lg:table-cell">70 - 79</td>
+                                <td class="hidden text-center small-font lg:table-cell">80 - 89</td>
+                                <td class="hidden text-center small-font lg:table-cell">90 - 99</td>
+                                <td id="topLotteryTime" width="9%" class="text-center small-font">
+                                    10:00 AM
+                                </td>
+                            </tr>
+                            <tr class="yellowbg">
+                                <td class="large-font"><b>GOODLUCK MUMBAI</b></td>
+                                <td class="hidden small-font lg:table-cell">100</td>
+                                <td class="small-font"><input type="text" class="border-0 rounded form-control"></td>
+                                <td class="small-font"><input type="text" class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="text-center small-font"><b id="topLottery1"> </b></td>
+                            </tr>
+                            <tr class="yellowbg">
+                                <td class="large-font"><b>GOODLUCK DELHI</b></td>
+                                <td class="hidden small-font lg:table-cell">100</td>
+                                <td class="small-font"><input type="text" class="border-0 rounded form-control"></td>
+                                <td class="small-font"><input type="text" class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="text-center small-font" id="yid"><b id="topLottery2"> </b></td>
+                            </tr>
+                            <tr class="yellowbg">
+                                <td class="large-font"><b>GOODLUCK SIKKIM</b></td>
+                                <td class="hidden small-font lg:table-cell">100</td>
+                                <td class="small-font"><input type="text" class="border-0 rounded form-control"></td>
+                                <td class="small-font"><input type="text" class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="hidden small-font lg:table-cell"><input type="text"
+                                        class="border-0 rounded form-control"></td>
+                                <td class="text-center small-font"><b id="topLottery3"> </b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <h3 class="flex items-center justify-center mt-10 mb-4 text-4xl font-bold">Today Result</h3>
+                <table class="table text-gray-600 table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Draw Time </th>
+                            <th>GOODLUCK Mumbai </th>
+                            <th>GOODLUCK Delhi </th>
+                            <th>GOODLUCK SIKKIM </th>
+                        </tr>
+                    </thead>
+                    <tbody id="t1">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <h3 class="flex items-center justify-center mt-10 mb-4 text-4xl font-bold">Good Luck Goa</h3>
+                <table class="table text-gray-600 table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Draw Date </th>
+                            <th>Draw Time </th>
+                            <th>Result </th>
+                        </tr>
+                    </thead>
+                    <tbody id="t2">
+
+                        <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+                        <!-- <tr>
+                            <td>02-07-2023</td>
+                            <td>10:40 AM</td>
+                            <td>95</td>
+                        </tr> -->
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="gl_night">
+                <div class="flex flex-col px-4 py-5 mx-auto my-10 bg-yellow-400 rounded md:p-5 md:max-w-md">
+                    <h2 class="text-2xl font-bold text-center text-bold">Good Luck Night Results</h2>
+                    <h2 class="my-3 text-2xl font-bold text-center text-bold">
+                        29-04-2023
+                    </h2>
+                    <h2 class="my-3 text-3xl font-bold text-center text-white">84</h2>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <p class="my-5">
+                    <strong>Disclaimer </strong>: Purchase of lottery using this website is strictly prohibited in the
+                    states where lotteries are banned. You must be above 18 years to play Online Lottery.
+
+
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bg-yellow-400">
+        <div class="py-5">
+            <div class="container">
+                <div class="flex justify-center row footer-links">
+                    <div class="w-auto d-inline-block sm:col-md-4 ">
+                        <a class="flex flex-col items-center justify-center p-4 text-3xl font-bold leading-tight text-white bg-black bg-opacity-50 rounded-sm"
+                            href="history.html">
+                            <i class="mb-2 text-yellow-400 fas fa-history"></i>
+                            <span>History</span>
+                        </a>
+                    </div>
+                    <div class="w-auto d-inline-block sm:col-md-4 ">
+
+                        <a class="flex flex-col items-center justify-center p-4 text-3xl font-bold leading-tight text-white bg-black bg-opacity-50 rounded-sm"
+                            href="how-to-play">
+                            <i class="mb-2 text-yellow-400 far fa-futbol"></i>
+                            <span>How to Play</span>
+                        </a>
+                    </div>
+                    <div class="w-auto d-inline-block sm:col-md-4 ">
+                        <a class="flex flex-col items-center justify-center p-4 text-3xl font-bold leading-tight text-white bg-black bg-opacity-50 rounded-sm"
+                            href="history.html">
+                            <i class="mb-2 text-yellow-400 far fa-chart-bar"></i>
+                            <span>History</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-3 bg-black">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="text-gray-300">
+                        &copy; 2021 <span class="text-yellow-400">Good Luck Play Win</span>. All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Livewire Scripts -->
+
+    <script src="js/livewire-livewire.js" data-turbo-eval="false" data-turbolinks-eval="false"></script>
+    <script data-turbo-eval="false" data-turbolinks-eval="false">
+        if (window.livewire) {
+            console.warn('Livewire: It looks like Livewire\'s @livewireScripts JavaScript assets have already been loaded. Make sure you aren\'t loading them twice.')
+        }
+
+        window.livewire = new Livewire();
+        window.livewire.devTools(true);
+        window.Livewire = window.livewire;
+        window.livewire_app_url = '';
+        window.livewire_token = '7EECYtYeFRjnzAV4nDY2nDfgdkZQjNmu8BfjDqjB';
+
+        /* Make sure Livewire loads first. */
+        if (window.Alpine) {
+            /* Defer showing the warning so it doesn't get buried under downstream errors. */
+            document.addEventListener("DOMContentLoaded", function () {
+                setTimeout(function () {
+                    console.warn("Livewire: It looks like AlpineJS has already been loaded. Make sure Livewire\'s scripts are loaded before Alpine.\\n\\n Reference docs for more info: http://laravel-livewire.com/docs/alpine-js")
+                })
+            });
+        }
+
+        /* Make Alpine wait until Livewire is finished rendering to do its thing. */
+        window.deferLoadingAlpine = function (callback) {
+            window.addEventListener('livewire:load', function () {
+                callback();
+            });
+        };
+
+        let started = false;
+
+        window.addEventListener('alpine:initializing', function () {
+            if (!started) {
+                window.livewire.start();
+
+                started = true;
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (!started) {
+                window.livewire.start();
+
+                started = true;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+<html>
+<style>
+    .point-list table.point-table tr:first-child td {
+        color: #fbc02d;
+        font-weight: 600;
+    }
+
+    .point-list table.point-table th,
+    .point-list table.point-table td {
+        padding: 8px 10px;
+        color: #505050;
+        font-weight: 400;
+    }
+
+    .point-list table.point-table tr:first-child {
+        background: #111111;
+    }
+
+    .point-list table.point-table tr {
+        border: 1px solid #e1e1e1;
+    }
+
+    .yellowbg,
+    .yellowbg td {
+        background: #fbc02d;
+        color: #000 !important;
+    }
+</style>
+
+</html>
