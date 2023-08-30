@@ -118,7 +118,7 @@
 
 
         const rowformatedTime = tConvert(hour + ":" + minutes);
-        const rowformatedTimeForM = tConvert(hour + ":" + minutes);
+        const rowformatedTimeForM = tConvert(hour + ":" + minutesForM);
 
         const formatedTime = rowformatedTime.substring(2, 3) == ':' ? rowformatedTime : "0" + rowformatedTime;
         const formatedTimeForM = rowformatedTimeForM.substring(2, 3) == ':' ? rowformatedTimeForM : "0" + rowformatedTimeForM;
@@ -269,7 +269,7 @@
         }
 
     </script>
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
 </head>
 
 <body id="body" style="display:none;" class="min-h-screen font-sans antialiased text-gray-900">
