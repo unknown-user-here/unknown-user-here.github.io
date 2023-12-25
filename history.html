@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf-token" content="vtve5PnC1UtEmp3ailMCqzh6GTkXfc3TXnLmVYvB">
     <title>History - Good luck satta</title>
-    <meta name="description" content="GOOD LUCK SATTA में आपका स्वागत है!!  | !!WELCOME TO GOOD LUCK SATTA!! : The Biggest and Best goodluck satta in INDIA! Play GOODLUCKPLAYWIN">
-    <meta name="keyword" content="goodluck satta,good luck satta, goodlucksatta, goodluck , satta good luck, good luck play win,goodluck play win, goodluck playwin">
+    <meta name="description"
+        content="GOOD LUCK SATTA में आपका स्वागत है!!  | !!WELCOME TO GOOD LUCK SATTA!! : The Biggest and Best goodluck satta in INDIA! Play GOODLUCKPLAYWIN">
+    <meta name="keyword"
+        content="goodluck satta,good luck satta, goodlucksatta, goodluck , satta good luck, good luck play win,goodluck play win, goodluck playwin">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
@@ -284,6 +286,25 @@
         const formatedTimeForM = rowformatedTimeForM.substring(2, 3) == ':' ? rowformatedTimeForM : "0" + rowformatedTimeForM;
 
         function loadTableFirst(date0) {
+            const cd = parseInt(date0.slice(0, 2))
+            const cm = parseInt(date0.slice(3, 5))
+            const cy = parseInt(date0.slice(6, 10))
+            const td = parseInt(todayDate.slice(0, 2))
+            const tm = parseInt(todayDate.slice(3, 5))
+            const ty = parseInt(todayDate.slice(6, 10))
+            if (ty < cy) {
+                showPageOne = true;
+                showPageVisible();
+                return
+            } else if (tm < cm) {
+                showPageOne = true;
+                showPageVisible();
+                return
+            } else if (td < cd) {
+                showPageOne = true;
+                showPageVisible();
+                return
+            }
             let firstTabledate = date0.split("-").reverse().join("-")
             const midurl = "?alt=media&token=";
             const url = "https://firebasestorage.googleapis.com/v0/b/ckri-bf3b8.appspot.com/o/" + firstTabledate + ".json";
@@ -340,6 +361,25 @@
         };
 
         function loadTableSecond(date0) {
+            const cd = parseInt(date0.slice(0, 2))
+            const cm = parseInt(date0.slice(3, 5))
+            const cy = parseInt(date0.slice(6, 10))
+            const td = parseInt(todayDate.slice(0, 2))
+            const tm = parseInt(todayDate.slice(3, 5))
+            const ty = parseInt(todayDate.slice(6, 10))
+            if (ty < cy) {
+                showPageSecond = true;
+                showPageVisible();
+                return
+            } else if (tm < cm) {
+                showPageSecond = true;
+                showPageVisible();
+                return
+            } else if (td < cd) {
+                showPageSecond = true;
+                showPageVisible();
+                return
+            }
             let date = date0.split("-").reverse().join("-")
             const midurl = "?alt=media&token=";
             const url = "https://firebasestorage.googleapis.com/v0/b/ckri-bf3b8.appspot.com/o/m" + date + ".json";
@@ -427,6 +467,7 @@
         }
         else {
             showPageSecond = true;
+            showPageVisible()
         }
         function showPageVisible() {
             if (showPageOne && showPageSecond) {
