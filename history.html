@@ -285,22 +285,14 @@
         const formatedTime = rowformatedTime.substring(2, 3) == ':' ? rowformatedTime : "0" + rowformatedTime;
         const formatedTimeForM = rowformatedTimeForM.substring(2, 3) == ':' ? rowformatedTimeForM : "0" + rowformatedTimeForM;
 
+        function isFutureDate(dateString) {
+            const [day, month, year] = dateString.split('-').map(Number);
+            const inputDate = new Date(year, month - 1, day); // Month is 0-indexed in Date constructor
+            const currentDate = new Date();
+            return inputDate > currentDate;
+        }
         function loadTableFirst(date0) {
-            const cd = parseInt(date0.slice(0, 2))
-            const cm = parseInt(date0.slice(3, 5))
-            const cy = parseInt(date0.slice(6, 10))
-            const td = parseInt(todayDate.slice(0, 2))
-            const tm = parseInt(todayDate.slice(3, 5))
-            const ty = parseInt(todayDate.slice(6, 10))
-            if (ty < cy) {
-                showPageOne = true;
-                showPageVisible();
-                return
-            } else if (tm < cm) {
-                showPageOne = true;
-                showPageVisible();
-                return
-            } else if (td < cd) {
+            if (isFutureDate(date0)) {
                 showPageOne = true;
                 showPageVisible();
                 return
@@ -361,21 +353,7 @@
         };
 
         function loadTableSecond(date0) {
-            const cd = parseInt(date0.slice(0, 2))
-            const cm = parseInt(date0.slice(3, 5))
-            const cy = parseInt(date0.slice(6, 10))
-            const td = parseInt(todayDate.slice(0, 2))
-            const tm = parseInt(todayDate.slice(3, 5))
-            const ty = parseInt(todayDate.slice(6, 10))
-            if (ty < cy) {
-                showPageSecond = true;
-                showPageVisible();
-                return
-            } else if (tm < cm) {
-                showPageSecond = true;
-                showPageVisible();
-                return
-            } else if (td < cd) {
+            if (isFutureDate(date0)) {
                 showPageSecond = true;
                 showPageVisible();
                 return
